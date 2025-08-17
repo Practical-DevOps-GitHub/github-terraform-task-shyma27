@@ -50,6 +50,8 @@ jobs:
           terraform plan -no-color -out tfplan
           PLAN=$(terraform show -json tfplan)
           bash -e .github/tests/test/tests.sh "$PLAN" .github/tests/test/test_cases.txt
+          env:
+              TF_VAR_GITHUB_TOKEN: ${{ secrets.PAT }}
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
